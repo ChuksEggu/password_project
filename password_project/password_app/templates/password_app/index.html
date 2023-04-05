@@ -1,0 +1,29 @@
+{% extends "password_app/base.html" %}
+
+{% block content %}
+  <h1>Password Generator & Recovery</h1>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" name="generate">Generate Passwords</button>
+    <button type="submit" name="recover">Recover Passwords</button>
+  </form>
+
+  {% if passwords %}
+    <h2>Generated Passwords (key: {{ key }}):</h2>
+    <ul>
+      {% for password in passwords %}
+        <li>{{ password }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+
+  {% if recovered_passwords %}
+    <h2>Recovered Passwords:</h2>
+    <ul>
+      {% for password in recovered_passwords %}
+        <li>{{ password }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endblock %}
